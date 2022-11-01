@@ -12,17 +12,6 @@ Plug-in which shows naver map on flutter project support Android and iOS.
 
 ---
 
-## 1.0.0 개발 관련 공지
-1.0.0 버전의 개발이 진행 중입니다.
-
-내부 설계 변경 및 새로운 기능 추가 등이 목적입니다.
-
-추가할 신기능 제안을 받고 있습니다. **[여기](https://github.com/note11g/flutter_naver_map/discussions/25)** 에서 제안해주세요!
-
-출시 예정일은 8월 15일입니다. 감사합니다.
-
----
-
 ## 시작하기 (공통)
 
 해당 플러그인은 **[Naver Cloud PlatForm - Map](https://guide.ncloud-docs.com/docs/naveropenapiv3-maps-overview#mobile-dynamic-map-android-ios-sdk-30)** 에서 제공하는 Map SDK 서비스를 Android와 iOS 환경에서 보여주는 플러그인입니다. 
