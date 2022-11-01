@@ -94,7 +94,7 @@ class NaverMapController {
       case 'map#onIndoorLevelChange':
         // LatLng latLng = LatLng._fromJson(call.arguments['indoorLevel'])!;
         var floorName = call.arguments['floorName'];
-        // print("FloorName is : " +  floorName.toString());
+        print("FloorChangedName is : " +  floorName.toString());
         _naverMapState._indoorLevelChange(floorName.toString());
         // print("mapOnIndoorLevelChanged");
         // int curLevel = (call.arguments['indoorLevel'])!;
