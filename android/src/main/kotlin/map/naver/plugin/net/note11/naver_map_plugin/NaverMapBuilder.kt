@@ -132,7 +132,7 @@ class NaverMapBuilder : NaverMapOptionSink {
     override fun setLocationButtonEnable(locationButtonEnable: Boolean) {
         options.indoorLevelPickerEnabled(true)
             .zoomControlEnabled(false)
-            .compassEnabled(false)
+            .compassEnabled(true)
         options.locationButtonEnabled(locationButtonEnable)
     }
 
