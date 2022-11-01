@@ -6,33 +6,7 @@
 
 Plug-in which shows naver map on flutter project support Android and iOS.
 
-해당 플러그인은 원작자인 **[LBSTECH](https://www.lbstech.net/)** 의 허가하에,
-**[해당 라이브러리](https://github.com/LBSTECH/naver_map_plugin)** 를 기반으로
-여러 부분을 보완한 라이브러리입니다.
 
----
-
-## 1.0.0 개발 관련 공지
-1.0.0 버전의 개발이 진행 중입니다.
-
-내부 설계 변경 및 새로운 기능 추가 등이 목적입니다.
-
-추가할 신기능 제안을 받고 있습니다. **[여기](https://github.com/note11g/flutter_naver_map/discussions/25)** 에서 제안해주세요!
-
-출시 예정일은 8월 15일입니다. 감사합니다.
-
----
-
-## 시작하기 (공통)
-
-해당 플러그인은 **[Naver Cloud PlatForm - Map](https://guide.ncloud-docs.com/docs/naveropenapiv3-maps-overview#mobile-dynamic-map-android-ios-sdk-30)** 에서 제공하는 Map SDK 서비스를 Android와 iOS 환경에서 보여주는 플러그인입니다. 
-
-`pubspec.yaml`에서 dependencies에 작성
-
-``` yaml
-dependencies:
-  flutter_naver_map: [최신버전]
-```
 
 ---
 
@@ -125,8 +99,3 @@ lfs 사용 설정이 안될 경우 Pod를 통한 dependency가 다운로드 되�
 
 ---
 
-## Warning
-- android에서 네이버 로고 버튼을 누를 시, App이 Crash되는 현상(AppCompat 때문)으로 해당 버튼을 비활성화 하였음. 
-
-## 맺음말
-이슈와 PR은 언제든 환영입니다!!
