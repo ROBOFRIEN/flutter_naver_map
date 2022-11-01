@@ -30,6 +30,9 @@ class _BaseMapPageState extends State<BaseMapPage> {
               zoom: 17,
             ),
             onMapCreated: onMapCreated,
+            onIndoorLevelChanged: (floorChangedName) {
+              print("IndoorLevelIsChanged : " + floorChangedName.toString());
+            },
             mapType: _mapType,
             initLocationTrackingMode: _trackingMode,
             locationButtonEnable: true,
@@ -46,11 +49,11 @@ class _BaseMapPageState extends State<BaseMapPage> {
             useSurface: kReleaseMode,
             logoClickEnabled: true,
           ),
-          Padding(
-            padding: EdgeInsets.all(16),
-            child: _mapTypeSelector(),
-          ),
-          _trackingModeSelector(),
+          // Padding(
+          //   padding: EdgeInsets.all(16),
+          //   child: _mapTypeSelector(),
+          // ),
+          // _trackingModeSelector(),
         ],
       ),
     );

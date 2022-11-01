@@ -7,6 +7,7 @@ class NaverMap extends StatefulWidget {
     Key? key,
     this.onMapCreated,
     this.onMapTap,
+    this.onIndoorLevelChanged,
     this.onMapLongTap,
     this.onMapDoubleTap,
     this.onMapTwoFingerTap,
@@ -50,6 +51,8 @@ class NaverMap extends StatefulWidget {
   /// 사용자가 선택한 지점의 [LatLng]을 파라미터로 가진다.
   final OnMapTap? onMapTap;
 
+  /// 실내 지도가 변경되었을 때
+  final OnIndoorLevelChanged? onIndoorLevelChanged;
   /// ### 지도를 롱 탭했을때 호출되는 콜백함수. (Android only)
   ///
   /// 사용자가 선택한 지점의 [LatLng]을 파라미터로 가진다.
@@ -431,6 +434,10 @@ class _NaverMapState extends State<NaverMap> {
 
   void _mapTap(LatLng position) {
     widget.onMapTap?.call(position);
+  }
+
+  void _indoorLevelChange(String floorName){
+    widget.onIndoorLevelChanged?.call(floorName);
   }
 
   void _mapLongTap(LatLng position) {

@@ -8,6 +8,7 @@ import com.naver.maps.map.NaverMap.OnSymbolClickListener
 import com.naver.maps.map.NaverMap.OnCameraChangeListener
 import com.naver.maps.map.NaverMap.OnCameraIdleListener
 import com.naver.maps.map.NaverMap.OnMapLongClickListener
+import com.naver.maps.map.NaverMap.OnIndoorSelectionChangeListener
 import com.naver.maps.map.NaverMap.OnMapDoubleTapListener
 import com.naver.maps.map.NaverMap.OnMapTwoFingerTapListener
 import android.graphics.PointF
@@ -21,12 +22,15 @@ import map.naver.plugin.net.note11.naver_map_plugin.NaverPathsController.PathCon
 import map.naver.plugin.net.note11.naver_map_plugin.NaverCircleController.CircleController
 import map.naver.plugin.net.note11.naver_map_plugin.NaverPolygonController.PolygonController
 import java.util.HashMap
+import com.naver.maps.map.indoor.IndoorSelection
+import com.naver.maps.map.indoor.*
 
 class NaverMapListeners( // member variable
     private val channel: MethodChannel,
     private val context: Context,
     private val naverMap: NaverMap
 ) : OnMapClickListener,
+    OnIndoorSelectionChangeListener,
     OnSymbolClickListener,
     OnCameraChangeListener,
     OnCameraIdleListener,
@@ -34,6 +38,16 @@ class NaverMapListeners( // member variable
     OnMapDoubleTapListener,
     OnMapTwoFingerTapListener,
     Overlay.OnClickListener {
+
+    override fun onIndoorSelectionChange(p0 : IndoorSelection? ){
+        val arguments: MutableMap<String, Any> = HashMap(2)
+        if(p0 != null){
+            var latlng = LatLng(p0.levelIndex.toDouble(), p0.levelIndex.toDouble())
+            arguments["indoorLevel"] = latlng.toJson()      // 이건 Index라서 못쓸듯 //
+            arguments["floorName"] = p0.level.name
+            channel.invokeMethod("map#onIndoorLevelChange", arguments)
+        }
+    }
 
     override fun onMapClick(pointF: PointF, latLng: LatLng) {
         val arguments: MutableMap<String, Any> = HashMap(2)

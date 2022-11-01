@@ -91,6 +91,16 @@ class NaverMapController {
           _onSnapShotDone = null;
         }
         break;
+      case 'map#onIndoorLevelChange':
+        // LatLng latLng = LatLng._fromJson(call.arguments['indoorLevel'])!;
+        var floorName = call.arguments['floorName'];
+        // print("FloorName is : " +  floorName.toString());
+        _naverMapState._indoorLevelChange(floorName.toString());
+        // print("mapOnIndoorLevelChanged");
+        // int curLevel = (call.arguments['indoorLevel'])!;
+        // print("mapOnIndoorLevelChanged curLevel is " + curLevel.toString());
+        // _naverMapState._indoorLevelChange(curLevel!);
+        break;
     }
   }
 
