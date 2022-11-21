@@ -97,7 +97,7 @@ class NaverMapController {
         var zoneID = call.arguments['zoneID'];
         print("thisZoneID(Building) is : " +  zoneID.toString());
         print("FloorChangedName is : " +  floorName.toString());
-        _naverMapState._indoorLevelChange(floorName.toString(), zoneID);
+        _naverMapState._indoorLevelChange(floorName.toString(), zoneID.toString());
         // print("mapOnIndoorLevelChanged");
         // int curLevel = (call.arguments['indoorLevel'])!;
         // print("mapOnIndoorLevelChanged curLevel is " + curLevel.toString());
