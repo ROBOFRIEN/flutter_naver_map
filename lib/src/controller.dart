@@ -94,8 +94,10 @@ class NaverMapController {
       case 'map#onIndoorLevelChange':
         // LatLng latLng = LatLng._fromJson(call.arguments['indoorLevel'])!;
         var floorName = call.arguments['floorName'];
+        var zoneID = call.arguments['zoneID'];
+        print("thisZoneID(Building) is : " +  zoneID.toString());
         print("FloorChangedName is : " +  floorName.toString());
-        _naverMapState._indoorLevelChange(floorName.toString());
+        _naverMapState._indoorLevelChange(floorName.toString(), zoneID);
         // print("mapOnIndoorLevelChanged");
         // int curLevel = (call.arguments['indoorLevel'])!;
         // print("mapOnIndoorLevelChanged curLevel is " + curLevel.toString());
@@ -171,6 +173,11 @@ class NaverMapController {
       tilt: position['tilt'],
       bearing: position['bearing'],
     );
+  }
+
+  Future<String> getIndoorLevel() async{
+    final String indoorFloor = (await _channel.invokeMethod<String>('map#getIndoorFloor'))!;
+    return indoorFloor;
   }
 
   /// 지도가 보여지는 view 의 크기를 반환.

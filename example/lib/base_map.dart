@@ -30,12 +30,13 @@ class _BaseMapPageState extends State<BaseMapPage> {
               zoom: 17,
             ),
             onMapCreated: onMapCreated,
-            onIndoorLevelChanged: (floorChangedName) {
+            onIndoorLevelChanged: (floorChangedName, zoneID) {
               print("IndoorLevelIsChanged : " + floorChangedName.toString());
+              print("IndoorLevelIsChanged Zone ID: " + zoneID.toString());
             },
             mapType: _mapType,
             initLocationTrackingMode: _trackingMode,
-            locationButtonEnable: true,
+            locationButtonEnable: false,
             indoorEnable: true,
             onCameraChange: _onCameraChange,
             onCameraIdle: _onCameraIdle,
@@ -60,13 +61,23 @@ class _BaseMapPageState extends State<BaseMapPage> {
   }
 
   _onMapTap(LatLng position) async {
-    await (await _controller.future).moveCamera(CameraUpdate.toCameraPosition(CameraPosition(target: position)), animationDuration: 1500);
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content:
-          Text('[onTap] lat: ${position.latitude}, lon: ${position.longitude}'),
-      duration: Duration(milliseconds: 500),
-      backgroundColor: Colors.black,
-    ));
+    print("onMapTap");
+    // await (await _controller.future).moveCamera(CameraUpdate.toCameraPosition(CameraPosition(target: position)), animationDuration: 1500);
+    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //   content:
+    //       Text('[onTap] lat: ${position.latitude}, lon: ${position.longitude}'),
+    //   duration: Duration(milliseconds: 500),
+    //   backgroundColor: Colors.black,
+    // ));
+
+    (await _controller.future).getVisibleRegion().then((value){
+      print("Visible Region : " + value.toString());
+
+    });
+
+    (await _controller.future).getIndoorLevel().then((value){
+      print("getIndoorLevel : " + (value.toString()));
+    });
   }
 
   _onMapLongTap(LatLng position) {
@@ -97,6 +108,7 @@ class _BaseMapPageState extends State<BaseMapPage> {
   }
 
   _onSymbolTap(LatLng? position, String? caption) {
+    print("onSymbolTap");
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(
           '[onSymbolTap] caption: $caption, lat: ${position?.latitude}, lon: ${position?.longitude}'),

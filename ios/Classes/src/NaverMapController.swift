@@ -31,8 +31,8 @@ protocol NaverMapOptionSink {
 }
 
 
-class NaverMapController: NSObject, FlutterPlatformView, NaverMapOptionSink, NMFMapViewTouchDelegate, NMFMapViewCameraDelegate, NMFAuthManagerDelegate {
-    
+class NaverMapController: NSObject, FlutterPlatformView, NaverMapOptionSink, NMFMapViewTouchDelegate, NMFMapViewCameraDelegate, NMFAuthManagerDelegate, NMFIndoorSelectionDelegate {
+
     var mapView : NMFMapView?
     var naverMap : NMFNaverMapView?
     let viewId : Int64
@@ -75,6 +75,7 @@ class NaverMapController: NSObject, FlutterPlatformView, NaverMapOptionSink, NMF
 
         mapView!.touchDelegate = self
         mapView!.addCameraDelegate(delegate: self)
+        mapView!.addIndoorSelectionDelegate(delegate: self)
         if let arg = argument {
             if let initialPositionData = arg["initialCameraPosition"] {
                 if initialPositionData is NSDictionary {
@@ -101,6 +102,8 @@ class NaverMapController: NSObject, FlutterPlatformView, NaverMapOptionSink, NMF
         // 제대로 동작하지 않는 컨트롤러 UI로 원인이 밝혀지기 전까진 강제 비활성화.
         naverMap!.showZoomControls = false
         naverMap!.showIndoorLevelPicker = true
+        naverMap!.showCompass = false
+        naverMap!.showScaleBar = false
     }
     
     func view() -> UIView {
@@ -112,6 +115,7 @@ class NaverMapController: NSObject, FlutterPlatformView, NaverMapOptionSink, NMF
         case "map#clearMapView":
             mapView = nil
             naverMap = nil
+//             indoorRegion = nil
             markersController = nil
             polygonController = nil
             pathController = nil
@@ -143,6 +147,11 @@ class NaverMapController: NSObject, FlutterPlatformView, NaverMapOptionSink, NMF
         case "map#getPosition":
             let position = mapView!.cameraPosition
             result(cameraPositionToJson(position: position))
+            break
+        case "map#getIndoorFloor":
+//             let indoorRegion = indoorRegion!.zoneIndex
+//             result(indoorRegion)
+            result("1")
             break
         case "tracking#mode":
             if let arg = call.arguments as! NSDictionary? {
@@ -292,6 +301,7 @@ class NaverMapController: NSObject, FlutterPlatformView, NaverMapOptionSink, NMF
     
     // onCameraChange
     func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
+
         var r = 0;
         switch reason {
         case NMFMapChangedByGesture:
@@ -311,7 +321,15 @@ class NaverMapController: NSObject, FlutterPlatformView, NaverMapOptionSink, NMF
                                                "reason" : r,
                                                "animated" : animated])
     }
-    
+    func indoorSelectionDidChanged(_ indoorSelection: NMFIndoorSelection? ){
+        if(indoorSelection != nil){
+            var zoneID = indoorSelection!.zone().zoneId;
+            var indoorfloor = indoorSelection!.level.name;      // String으로 B1, B2
+            print("Func - ZoneID : " + String(zoneID));
+            print("Func - IndoorSelectionDidChanged - " + String(indoorfloor));
+            self.channel?.invokeMethod("map#onIndoorLevelChange" , arguments: ["floorName" : indoorfloor, "zoneID" : String(zoneID)]);
+        }
+    }
     func mapViewCameraIdle(_ mapView: NMFMapView) {
         self.channel?.invokeMethod("camera#idle" , arguments: nil)
     }
@@ -382,7 +400,7 @@ class NaverMapController: NSObject, FlutterPlatformView, NaverMapOptionSink, NMF
                                           "caption" : symbol.caption!])
         return false
     }
-    
+
     // naver overlay touch handler
     func overlayTouchHandler(overlay: NMFOverlay) -> Bool {
         if let marker = overlay.userInfo["marker"] as? NMarkerController {

@@ -8,7 +8,7 @@ typedef void OnMarkerTab(Marker? marker, Map<String, int?> iconSize);
 
 typedef void OnMapTap(LatLng latLng);
 
-typedef void OnIndoorLevelChanged(String floorName);
+typedef void OnIndoorLevelChanged(String floorName, String zoneID);
 
 typedef void OnMapLongTap(LatLng latLng);
 
