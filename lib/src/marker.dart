@@ -170,6 +170,12 @@ class Marker {
   /// > 앵커는 아이콘 이미지에서 기준이 되는 지점을 의미하는 값으로, 아이콘에서 앵커로 지정된 지점이 마커의 좌표에 위치하게 됩니다.
   AnchorPoint? anchor;
 
+  /// 기본값은 false입니다.
+  bool? hideCollidedMarkers;
+
+  /// 기본값은 false입니다.
+  bool? hideCollidedSymbols;
+
   Marker(
       {required this.markerId,
       required this.position,
@@ -200,7 +206,9 @@ class Marker {
       this.subCaptionTextSize,
       this.subCaptionColor,
       this.subCaptionHaloColor,
-      this.subCaptionRequestedWidth});
+      this.subCaptionRequestedWidth,
+      this.hideCollidedMarkers,
+      this.hideCollidedSymbols});
 
   Map<String, dynamic> _toJson() {
     final Map<String, dynamic> json = <String, dynamic>{};
@@ -241,6 +249,9 @@ class Marker {
     addIfPresent('iconFromPath', icon?.imageFile?.path);
     addIfPresent('infoWindow', infoWindow);
     addIfPresent('anchor', anchor?._json);
+    addIfPresent('hideCollidedMarkers', hideCollidedMarkers);
+    addIfPresent('hideCollidedSymbols', hideCollidedSymbols);
+
 
     return json;
   }
@@ -279,7 +290,9 @@ class Marker {
           iconTintColor == other.iconTintColor &&
           zIndex == other.zIndex &&
           globalZIndex == other.globalZIndex &&
-          anchor == other.anchor;
+          anchor == other.anchor &&
+          hideCollidedMarkers == other.hideCollidedMarkers &&
+          hideCollidedSymbols == other.hideCollidedSymbols;
 
   @override
   int get hashCode =>
@@ -312,7 +325,9 @@ class Marker {
       iconTintColor.hashCode ^
       zIndex.hashCode ^
       globalZIndex.hashCode ^
-      anchor.hashCode;
+      anchor.hashCode^
+      hideCollidedSymbols.hashCode^
+      hideCollidedMarkers.hashCode;
 
   /// 같은 값을 가진 새로운 Maker 객체를 반환한다.
   Marker clone() {
@@ -346,7 +361,9 @@ class Marker {
         zIndex: zIndex,
         icon: icon,
         infoWindow: infoWindow,
-        anchor: anchor);
+        anchor: anchor,
+        hideCollidedMarkers: hideCollidedMarkers,
+        hideCollidedSymbols: hideCollidedSymbols);
   }
 
   @override

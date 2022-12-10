@@ -150,6 +150,13 @@ class NaverMarkerController(
             if (iconImagePath != null) marker.icon = toOverlayImageFromPath(iconImagePath)
             val infoWindow = json["infoWindow"]
             infoWindowText = if (infoWindow != null) infoWindow as String? else null
+            /// YS Added ////
+            val hideCollidedMarkers = json["hideCollidedMarkers"]
+            if (hideCollidedMarkers != null) marker.isHideCollidedMarkers =
+                hideCollidedMarkers as Boolean
+            val hideCollidedSymbols = json["hideCollidedSymbols"]
+            if (hideCollidedSymbols != null) marker.isHideCollidedSymbols =
+                hideCollidedSymbols as Boolean
         }
 
         fun setMap(naverMap: NaverMap?) {

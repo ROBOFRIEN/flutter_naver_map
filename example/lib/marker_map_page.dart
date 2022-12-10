@@ -166,8 +166,12 @@ class _MarkerMapPageState extends State<MarkerMapPage> {
       _markers.add(Marker(
         markerId: DateTime.now().toIso8601String(),
         position: latLng,
-        infoWindow: '테스트',
+        infoWindow: '테스트1',
+        hideCollidedSymbols: true,
+        hideCollidedMarkers: true,
         onMarkerTab: _onMarkerTap,
+        captionText: '로보프렌마커',
+
       ));
       setState(() {});
     }
