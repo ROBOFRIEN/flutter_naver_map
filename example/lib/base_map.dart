@@ -30,9 +30,10 @@ class _BaseMapPageState extends State<BaseMapPage> {
               zoom: 17,
             ),
             onMapCreated: onMapCreated,
-            onIndoorLevelChanged: (floorChangedName, zoneID) {
+            onIndoorLevelChanged: (floorChangedName, zoneID, levelID) {
               print("IndoorLevelIsChanged : " + floorChangedName.toString());
               print("IndoorLevelIsChanged Zone ID: " + zoneID.toString());
+              print("IndoorLevelIsChanged Level ID: " + levelID.toString());
             },
             mapType: _mapType,
             initLocationTrackingMode: _trackingMode,
@@ -49,6 +50,14 @@ class _BaseMapPageState extends State<BaseMapPage> {
             minZoom: 12,
             useSurface: kReleaseMode,
             logoClickEnabled: true,
+          ),
+
+          FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: () async {
+              (await _controller.future).requestIndoorView('41001114000200101', '305000');
+
+            },
           ),
           // Padding(
           //   padding: EdgeInsets.all(16),
@@ -226,6 +235,7 @@ class _BaseMapPageState extends State<BaseMapPage> {
     print('카메라 움직임 >>> 위치 : ${latLng?.latitude}, ${latLng?.longitude}'
         '\n원인: $reason'
         '\n에니메이션 여부: $isAnimated');
+
   }
 
   void _onCameraIdle() {

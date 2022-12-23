@@ -31,6 +31,7 @@ import java.lang.IllegalArgumentException
 import java.util.HashMap
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.math.roundToInt
+import com.naver.maps.map.indoor.IndoorView
 
 class NaverMapController(
     id: Int,
@@ -355,6 +356,19 @@ class NaverMapController(
                     null
                 )
             }
+            "indoor#change" -> {
+                if (::naverMap.isInitialized) {
+                    naverMap.requestIndoorView( IndoorView(methodCall.argument<String>("zoneID")!!, methodCall.argument<String>("levelID")!!))
+//                    naverMap.requestIndoorView(indoorView)
+                    result.success(null)
+                } else result.error(
+                    "네이버맵 초기화 안됨.",
+                    "네이버 지도가 생성되기 전에 이 메서드를 사용할 수 없습니다.",
+                    null
+                )
+            }
+
+
         }
     }
 

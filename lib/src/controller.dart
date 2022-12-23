@@ -95,9 +95,12 @@ class NaverMapController {
         // LatLng latLng = LatLng._fromJson(call.arguments['indoorLevel'])!;
         var floorName = call.arguments['floorName'];
         var zoneID = call.arguments['zoneID'];
+        var indoorLevel = call.arguments['indoorLevel'];
+
         print("thisZoneID(Building) is : " +  zoneID.toString());
         print("FloorChangedName is : " +  floorName.toString());
-        _naverMapState._indoorLevelChange(floorName.toString(), zoneID.toString());
+        print("indoorLevel is : " +  indoorLevel.toString());
+        _naverMapState._indoorLevelChange(floorName.toString(), zoneID.toString(), indoorLevel.toString());
         // print("mapOnIndoorLevelChanged");
         // int curLevel = (call.arguments['indoorLevel'])!;
         // print("mapOnIndoorLevelChanged curLevel is " + curLevel.toString());
@@ -203,6 +206,15 @@ class NaverMapController {
       'animation': animationDuration
     });
   }
+
+  Future<void> requestIndoorView( String zoneID, String levelID ) async {
+    await _channel.invokeMethod<void>('indoor#change', <String, dynamic>{
+      'zoneID': zoneID,
+      'levelID': levelID
+    });
+  }
+
+
 
   /// <h2>카메라 추적모드 변경</h2>
   /// <p>[NaverMap]을 생성할 때 주어진 [initialLocationTrackingMode]의 인자로 전달된 값이

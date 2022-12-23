@@ -43,7 +43,7 @@ class NaverMapListeners( // member variable
         val arguments: MutableMap<String, Any> = HashMap(2)
         if(p0 != null){
             var latlng = LatLng(p0.levelIndex.toDouble(), p0.levelIndex.toDouble())
-            arguments["indoorLevel"] = latlng.toJson()      // 이건 Index라서 못쓸듯 //
+            arguments["indoorLevel"] = p0.level.indoorView.levelId      // 이건 Index라서 못쓸듯 //
             arguments["floorName"] = p0.level.name
             arguments["zoneID"] = p0.zone.zoneId
             channel.invokeMethod("map#onIndoorLevelChange", arguments)

@@ -436,8 +436,8 @@ class _NaverMapState extends State<NaverMap> {
     widget.onMapTap?.call(position);
   }
 
-  void _indoorLevelChange(String floorName, String zoneID){
-    widget.onIndoorLevelChanged?.call(floorName, zoneID);
+  void _indoorLevelChange(String floorName, String zoneID, String levelID){
+    widget.onIndoorLevelChanged?.call(floorName, zoneID, levelID);
   }
 
   void _mapLongTap(LatLng position) {
