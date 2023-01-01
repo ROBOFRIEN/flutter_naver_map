@@ -39,6 +39,7 @@ class _BaseMapPageState extends State<BaseMapPage> {
             initLocationTrackingMode: _trackingMode,
             locationButtonEnable: false,
             indoorEnable: true,
+            indoorLevelPickerEnable: true,
             onCameraChange: _onCameraChange,
             onCameraIdle: _onCameraIdle,
             onMapTap: _onMapTap,

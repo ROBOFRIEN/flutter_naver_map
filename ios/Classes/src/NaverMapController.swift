@@ -11,6 +11,7 @@ import NMapsMap
 
 protocol NaverMapOptionSink {
     func setIndoorEnable(_ indoorEnable: Bool)
+//     func setIndoorLevelPickerEnable(_ indoorEnable: Bool)
     func setNightModeEnable(_ nightModeEnable: Bool)
     func setLiteModeEnable(_ liteModeEnable: Bool)
     func setMapType(_ typeIndex: Int)
@@ -339,6 +340,9 @@ class NaverMapController: NSObject, FlutterPlatformView, NaverMapOptionSink, NMF
         if let indoorEnable = option["indoorEnable"] as? Bool {
             sink.setIndoorEnable(indoorEnable)
         }
+//         if let indoorEnable = option["indoorLevelPickerEnable"] as? Bool {
+//             sink.setIndoorEnable(indoorEnable)
+//         }
         if let nightModeEnable = option["nightModeEnable"] as? Bool {
             sink.setNightModeEnable(nightModeEnable)
         }

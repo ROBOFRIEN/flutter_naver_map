@@ -66,6 +66,7 @@ class NaverMapController(
     private lateinit var markerController: NaverMarkerController
     private lateinit var circleController: NaverCircleController
     private lateinit var polygonController: NaverPolygonController
+    private var indoorLevelPickerBoolean = false;
 
     init { methodChannel.setMethodCallHandler(this) }
 
@@ -74,7 +75,7 @@ class NaverMapController(
         this.naverMap.uiSettings.run {
             // 제대로 동작하지 않는 컨트롤러 UI로 원인이 밝혀지기 전까진 강제 비활성화.
             isZoomControlEnabled = false
-            isIndoorLevelPickerEnabled = true
+            isIndoorLevelPickerEnabled = indoorLevelPickerBoolean
 
             // 네이버 로고 선택시 Crash 나는 현상 test
             // isLogoClickEnabled = true
@@ -452,7 +453,11 @@ class NaverMapController(
 
     override fun setIndoorEnable(indoorEnable: Boolean) {
         naverMap.isIndoorEnabled = indoorEnable
-        naverMap.uiSettings.isIndoorLevelPickerEnabled = indoorEnable
+    }
+
+    override fun setIndoorLevelPickerEnable(indoorLevelPickerEnable: Boolean) {
+        indoorLevelPickerBoolean = indoorLevelPickerEnable;
+        naverMap.uiSettings.isIndoorLevelPickerEnabled = indoorLevelPickerEnable
     }
 
     override fun setMapType(typeIndex: Int) {

@@ -20,6 +20,7 @@ class NaverMap extends StatefulWidget {
     this.liteModeEnable = false,
     this.nightModeEnable = false,
     this.indoorEnable = false,
+    this.indoorLevelPickerEnable = false,
     this.activeLayers = const [MapLayer.LAYER_GROUP_BUILDING],
     this.buildingHeight = 1.0,
     this.symbolScale = 1.0,
@@ -102,6 +103,8 @@ class NaverMap extends StatefulWidget {
   /// 단, 지도 유형이 실내지도를 지원하지 않으면 실내지도를 활성화하더라도 아무런 변화가
   /// 일어나지 않습니다. Basic, Terrain 지도 유형만이 실내지도를 지원합니다.
   final bool indoorEnable;
+
+  final bool indoorLevelPickerEnable;
 
   /// 바닥 지도 위에 부가적인 정보를 나타내는 레이어 그룹을 활성화 할 수 있습니다.
   /// 지도의 타입마다 설정가능한 레이어 그룹이 다릅니다.
@@ -474,6 +477,7 @@ class _NaverMapOptions {
     this.liteModeEnable,
     this.nightModeEnable,
     this.indoorEnable,
+    this.indoorLevelPickerEnable,
     this.activeLayers,
     this.buildingHeight,
     this.symbolScale,
@@ -497,6 +501,7 @@ class _NaverMapOptions {
       liteModeEnable: map.liteModeEnable,
       nightModeEnable: map.nightModeEnable,
       indoorEnable: map.indoorEnable,
+      indoorLevelPickerEnable : map.indoorLevelPickerEnable,
       activeLayers: map.activeLayers,
       buildingHeight: map.buildingHeight,
       symbolScale: map.symbolScale,
@@ -519,6 +524,7 @@ class _NaverMapOptions {
   final bool? liteModeEnable;
   final bool? nightModeEnable;
   final bool? indoorEnable;
+  final bool? indoorLevelPickerEnable;
   final List<MapLayer>? activeLayers;
   final double? buildingHeight;
   final double? symbolScale;
@@ -551,6 +557,7 @@ class _NaverMapOptions {
     addIfNonNull('liteModeEnable', liteModeEnable);
     addIfNonNull('nightModeEnable', nightModeEnable);
     addIfNonNull('indoorEnable', indoorEnable);
+    addIfNonNull('indoorLevelPickerEnable', indoorLevelPickerEnable);
     addIfNonNull('activeLayers', inactiveLayerIndices);
     addIfNonNull('buildingHeight', buildingHeight);
     addIfNonNull('symbolScale', symbolScale);

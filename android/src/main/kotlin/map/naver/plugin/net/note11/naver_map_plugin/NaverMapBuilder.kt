@@ -52,7 +52,10 @@ class NaverMapBuilder : NaverMapOptionSink {
 
     override fun setIndoorEnable(indoorEnable: Boolean) {
         options.indoorEnabled(indoorEnable)
-        options.indoorLevelPickerEnabled(indoorEnable)
+    }
+
+    override fun setIndoorLevelPickerEnable(indoorLevelPickerEnable: Boolean) {
+        options.indoorLevelPickerEnabled(indoorLevelPickerEnable)
     }
 
     override fun setMapType(typeIndex: Int) {

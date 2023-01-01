@@ -17,6 +17,7 @@ object Convert {
             "liteModeEnable" to { setLiteModeEnable(it as Boolean) },
             "nightModeEnable" to { setNightModeEnable(it as Boolean) },
             "indoorEnable" to { setIndoorEnable(it as Boolean) },
+            "indoorLevelPickerEnable" to {setIndoorLevelPickerEnable(it as Boolean)},
             "locationButtonEnable" to { setLocationButtonEnable(it as Boolean) },
             "scrollGestureEnable" to { setScrollGestureEnable(it as Boolean) },
             "zoomGestureEnable" to { setZoomGestureEnable(it as Boolean) },

@@ -4,6 +4,7 @@ interface NaverMapOptionSink {
     fun setNightModeEnable(nightModeEnable: Boolean)
     fun setLiteModeEnable(liteModeEnable: Boolean)
     fun setIndoorEnable(indoorEnable: Boolean)
+    fun setIndoorLevelPickerEnable(indoorLevelPickerEnable: Boolean)
     fun setMapType(typeIndex: Int)
     fun setBuildingHeight(buildingHeight: Double)
     fun setSymbolScale(symbolScale: Double)
